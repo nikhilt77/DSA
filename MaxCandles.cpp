@@ -1,28 +1,57 @@
 #include <iostream>
 #include <vector>
+#include <fstream>
 #include <algorithm>
 
 using namespace std;
 
 int birthdayCakeCandles(vector<int> candles) {
-    int maxHeight = *max_element(candles.begin(), candles.end());
-    int count = count_if(candles.begin(), candles.end(), [maxHeight](int height) {
-        return height == maxHeight;
-    });
+    int max = 0;
+    int count = 0;
+    int n = candles.size();
+
+    for (int i = 0; i < n; i++) {
+        if (candles[i] >= max) {
+            max = candles[i];
+        }
+    }
+
+    for (int i = 0; i < n; i++) {
+        if (max == candles[i]) {
+            count++;
+        }
+    }
+
     return count;
 }
 
 int main() {
-    int candles_count;
-    cin >> candles_count;
+    ofstream fout(getenv("OUTPUT_PATH"));
+    string candles_count_temp;
+    getline(cin, candles_count_temp);
+    int candles_count = stoi(candles_count_temp);
+
+    string candles_temp_temp;
+    getline(cin, candles_temp_temp);
+    vector<string> candles_temp;
+    size_t start = 0;
+    size_t end = 0;
+
+    while ((end = candles_temp_temp.find(" ", start)) != string::npos) {
+        candles_temp.push_back(candles_temp_temp.substr(start, end - start));
+        start = end + 1;
+    }
+    candles_temp.push_back(candles_temp_temp.substr(start));
 
     vector<int> candles(candles_count);
     for (int i = 0; i < candles_count; i++) {
-        cin >> candles[i];
+        candles[i] = stoi(candles_temp[i]);
     }
 
     int result = birthdayCakeCandles(candles);
-    cout << result << endl;
+
+    fout << result << "\n";
+    fout.close();
 
     return 0;
 }
