@@ -1,19 +1,24 @@
+#include <cctype>
 #include<iostream>
 #include<string>
+#include<map>
 using namespace std;
 
 int main(){
     string s;
     cout << "Enter String:";
     cin >> s;
-    int Hash[26]={0};
-    for(int i=0;i<s.size();i++){
-        Hash[s[i]-'a']+=1;
+    for(char &c:s){
+        c=tolower(c);
+    }
+    map<char,int> mpp;
+    for(int i=0;i<s.length();i++){
+        mpp[s[i]]++;
     }
     while(true){
         char c;
         cout << "Enter character:";
         cin >> c;
-        cout << Hash[c-'a']<<endl;
+        cout <<c<<":"<<mpp[c]<<endl;
     }
 }
