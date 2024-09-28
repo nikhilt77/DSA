@@ -1,5 +1,5 @@
 #include<iostream>
-
+#include<map>
 using namespace std;
 
 int main(){
@@ -7,24 +7,25 @@ int main(){
     cout <<"Enter size of array"<< endl;
     cin >> n;
     int arr[n];
+    map<int,int> mpp;
     cout << "Enter array elements" << endl;
     for(int i=0;i<n;i++){
         cin >> arr[i];
+        mpp[arr[i]]++;
     }
     for(int i=0;i<n;i++){
-        cout << arr[i];
+        cout << arr[i] << " ";
     }
-    int hash[8]={0};
-    for(int i=0;i<n;i++){
-        hash[arr[i]]++;
-    }
+    cout << endl;
     int q;
+    cout << "Enter the limit:" << endl;
     cin >> q;
-    while(true){
+    while(q>=0){
         int num;
         cout << "Enter number:";
         cin >> num;
-        cout << hash[num] << endl;
+        cout <<num<<":"<< mpp[q] << endl;
+        q--;
     }
     return 0;
 }
