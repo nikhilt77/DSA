@@ -1,3 +1,6 @@
+//Best and Average Case: O(1)
+//Worst Case: O(n)
+
 #include<iostream>
 #include<map>
 using namespace std;
