@@ -1,45 +1,34 @@
-#include <iostream>
-#include <vector>
+#include<iostream>
+#include<vector>
+
 using namespace std;
 
-class Solution {
-public:
-    void rotate(vector<int>& nums, int k) {
-       vector<int> rot;
-       int n = nums.size();
-       k = k % n;
-       for(int i = n - k; i < n; i++){
-            rot.push_back(nums[i]);
-       }
-       for(int i = 0; i < n - k; i++){
-            rot.push_back(nums[i]);
-       }
-       nums = rot; 
+class Solution{
+    public:
+    void rotateArray(vector<int>& nums, int k) {
+        int n=nums.size();
+        k=k%n;
+        reverse(nums.begin(),nums.end());
+        reverse(nums.begin(),nums.begin()+k);
+        reverse(nums.begin()+k,nums.end());
     }
 };
-
-int main() {
-    int n, k;
-    cout << "Enter the number of elements in the array: ";
+int main(){
+    int n;
+    cout << "Enter size:";
     cin >> n;
-    
-    vector<int> nums(n);
-    cout << "Enter the elements of the array: ";
-    for(int i = 0; i < n; i++) {
-        cin >> nums[i];
+    vector<int> nums;
+    for(int i=0;i<n;i++){
+        int ele;
+        cin >> ele;
+        nums.push_back(ele);
     }
-    
-    cout << "Enter the value of k: ";
+    int k;
+    cout << "Enter no. of times:";
     cin >> k;
-    
-    Solution sol;
-    sol.rotate(nums, k);
-    
-    cout << "Rotated array: ";
-    for(int num : nums) {
-        cout << num << " ";
+    Solution r;
+    r.rotateArray(nums,k);
+    for(int i=0;i<n;i++){
+        cout << nums[i] << " ";
     }
-    cout << endl;
-
-    return 0;
 }
